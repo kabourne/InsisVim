@@ -27,11 +27,14 @@ keymap("n", keys.n_force_quit, "<CMD>qa!<CR>")
 keymap({ "v", "n" }, "$", "g_")
 keymap({ "v", "n" }, "g_", "$")
 
+keymap({ "n", "v" }, keys.n_v_3j, "3<C-e>")
+keymap({ "n", "v" }, keys.n_v_3k, "3<C-y>")
+
 keymap({ "n", "v" }, keys.n_v_5j, "5j")
 keymap({ "n", "v" }, keys.n_v_5k, "5k")
 
-keymap({ "n", "v" }, keys.n_v_10j, "10j")
-keymap({ "n", "v" }, keys.n_v_10k, "10k")
+-- keymap({ "n", "v" }, keys.n_v_10j, "10j")
+-- keymap({ "n", "v" }, keys.n_v_10k, "10k")
 
 -- magic search
 if cfg.enable_very_magic_search then
