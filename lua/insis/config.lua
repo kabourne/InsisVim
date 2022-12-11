@@ -134,12 +134,12 @@ local UserConfig = {
   nvimTree = {
     enable = true,
     keys = {
-      toggle = { "<A-m>", "<leader>m" },
+      toggle = { "<A-m>", "<leader>m", "<leader><leader>" },
       refresh = "R",
       -- open / close --
-      edit = { "o", "<2-LeftMouse>" },
+      edit = { "o", "<2-LeftMouse>", "<CR>" },
       close = "<BS>",
-      system_open = "<CR>",
+--       system_open = "<CR>",
       vsplit = "sv",
       split = "sh",
       tabnew = "gh",
