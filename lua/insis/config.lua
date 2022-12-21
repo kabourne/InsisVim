@@ -491,6 +491,13 @@ local UserConfig = {
     formatter = "terraform_fmt",
     format_on_save = true,
   },
+
+  docker = {
+    enable = true,
+    lsp = "dockerls",
+    linter = "hadolint",
+    format_on_save = false,
+  },
 }
 
 return UserConfig

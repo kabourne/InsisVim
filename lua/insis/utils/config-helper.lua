@@ -47,6 +47,10 @@ M.getTSEnsureList = function()
     parserSet["yaml"] = true
   end
 
+  if cfg.docker and cfg.docker.enable then
+    parserSet["dockerfile"] = true
+  end
+
 --   if cfg.terraform and cfg.terraform.enable then
 --     parserSet["terraform"] = true
 --   end
@@ -102,6 +106,7 @@ M.getNulllsSources = function()
   local linterMap = {
     golangci_lint = diagnostics.golangci_lint,
     eslint_d = diagnostics.eslint_d,
+    hadolint = diagnostics.hadolint,
   }
   local codeActionMap = {
     eslint_d = code_actions.eslint_d,
@@ -166,6 +171,12 @@ M.getNulllsSources = function()
     local formatter = formatterMap[cfg.terraform.formatter]
     if formatter then
       table.insert(sources, formatter)
+    end
+  end
+  if cfg.docker and cfg.docker.enable then
+    local linter = linterMap[cfg.docker.linter]
+    if linter then
+      table.insert(sources, linter)
     end
   end
 
@@ -354,6 +365,12 @@ M.getMasonEnsureList = function()
   if cfg.yaml and cfg.yaml.enable then
     if configMap[cfg.yaml.lsp] then
       servers[cfg.yaml.lsp] = configMap[cfg.yaml.lsp]
+    end
+  end
+
+  if cfg.docker and cfg.docker.enable then
+    if configMap[cfg.docker.lsp] then
+      servers[cfg.docker.lsp] = configMap[cfg.docker.lsp]
     end
   end
 

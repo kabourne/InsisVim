@@ -32,7 +32,7 @@ TODO
 brew install terraform
 brew install stylua
 brew install shfmt
-
+brew install hadolint
 https://github.com/google/yamlfmt/releases/tag/v0.6.0
 
 ## License
