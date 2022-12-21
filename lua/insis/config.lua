@@ -484,6 +484,13 @@ local UserConfig = {
     -- TODO: LSP DAP mirror config
     -- carefully change these value
   },
+
+  terraform = {
+    enable = true,
+    lsp = "terraformls",
+    formatter = "terraform_fmt",
+    format_on_save = true,
+  },
 }
 
 return UserConfig

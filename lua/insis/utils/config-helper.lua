@@ -43,6 +43,10 @@ M.getTSEnsureList = function()
     parserSet["markdown"] = true
   end
 
+--   if cfg.terraform and cfg.terraform.enable then
+--     parserSet["terraform"] = true
+--   end
+
   local ensureInstalled = {}
   for key, _ in pairs(parserSet) do
     table.insert(ensureInstalled, key)
@@ -66,6 +70,7 @@ M.getNulllsSources = function()
     gofmt = formatting.gofmt,
     rustfmt = formatting.rustfmt,
     eslint_d = formatting.eslint_d,
+    terraform_fmt = formatting.terraform_fmt,
     prettier = formatting.prettier.with({
       filetypes = {
         "javascript",
@@ -148,6 +153,12 @@ M.getNulllsSources = function()
   end
   if cfg.ruby and cfg.ruby.enable then
     local formatter = formatterMap[cfg.ruby.formatter]
+    if formatter then
+      table.insert(sources, formatter)
+    end
+  end
+  if cfg.terraform and cfg.terraform.enable then
+    local formatter = formatterMap[cfg.terraform.formatter]
     if formatter then
       table.insert(sources, formatter)
     end
@@ -235,6 +246,11 @@ M.getFormatOnSavePattern = function()
       table.insert(pattern, "*.yaml")
     end
   end
+  if cfg.terraform and cfg.terraform.enable then
+    if cfg.terraform.format_on_save then
+      table.insert(pattern, "*.tf")
+    end
+  end
   return pattern
 end
 
@@ -264,6 +280,7 @@ M.getMasonEnsureList = function()
     gopls = require("insis.lsp.config.gopls"),
     clangd = require("insis.lsp.config.clangd"),
     cmake = require("insis.lsp.config.cmake"),
+    terraformls = require("insis.lsp.config.terraform"),
     -- remark_ls = require("insis.lsp.config.markdown"),
   }
 
@@ -314,6 +331,12 @@ M.getMasonEnsureList = function()
   if cfg.json and cfg.json.enable then
     if configMap[cfg.json.lsp] then
       servers[cfg.json.lsp] = configMap[cfg.json.lsp]
+    end
+  end
+
+  if cfg.terraform and cfg.terraform.enable then
+    if configMap[cfg.terraform.lsp] then
+      servers[cfg.terraform.lsp] = configMap[cfg.terraform.lsp]
     end
   end
 
