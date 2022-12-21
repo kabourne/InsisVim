@@ -51,6 +51,10 @@ M.getTSEnsureList = function()
     parserSet["dockerfile"] = true
   end
 
+  if cfg.java and cfg.java.enable then
+    parserSet["java"] = true
+  end
+
 --   if cfg.terraform and cfg.terraform.enable then
 --     parserSet["terraform"] = true
 --   end
@@ -80,6 +84,7 @@ M.getNulllsSources = function()
     eslint_d = formatting.eslint_d,
     terraform_fmt = formatting.terraform_fmt,
     yamlfmt = formatting.yamlfmt,
+    astyle = formatting.astyle,
     prettier = formatting.prettier.with({
       filetypes = {
         "javascript",
@@ -179,6 +184,12 @@ M.getNulllsSources = function()
       table.insert(sources, linter)
     end
   end
+  if cfg.java and cfg.java.enable then
+    local formatter = formatterMap[cfg.java.formatter]
+    if formatter then
+      table.insert(sources, formatter)
+    end
+  end
 
   if cfg.json and cfg.json.enable then
     if cfg.json.formatter == "fixjson" then
@@ -268,6 +279,11 @@ M.getFormatOnSavePattern = function()
       table.insert(pattern, "*.yaml")
     end
   end
+  if cfg.java and cfg.java.enable then
+    if cfg.java.format_on_save then
+      table.insert(pattern, "*.java")
+    end
+  end
   if cfg.terraform and cfg.terraform.enable then
     if cfg.terraform.format_on_save then
       table.insert(pattern, "*.tf")
@@ -303,6 +319,7 @@ M.getMasonEnsureList = function()
     clangd = require("insis.lsp.config.clangd"),
     cmake = require("insis.lsp.config.cmake"),
     terraformls = require("insis.lsp.config.terraform"),
+    jdtls = require("insis.lsp.config.java"),
     -- remark_ls = require("insis.lsp.config.markdown"),
   }
 
@@ -374,6 +391,11 @@ M.getMasonEnsureList = function()
     end
   end
 
+  if cfg.java and cfg.java.enable then
+    if configMap[cfg.java.lsp] then
+      servers[cfg.java.lsp] = configMap[cfg.java.lsp]
+    end
+  end
   -- if cfg.markdown and cfg.markdown.enable then
   -- not used
   -- end

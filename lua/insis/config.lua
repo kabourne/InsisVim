@@ -498,6 +498,13 @@ local UserConfig = {
     linter = "hadolint",
     format_on_save = false,
   },
+
+  java = {
+    enable = true,
+    lsp = "jdtls",
+    formatter = "astyle",
+    format_on_save = true,
+  },
 }
 
 return UserConfig
