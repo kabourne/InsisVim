@@ -398,11 +398,11 @@ local UserConfig = {
 
   ---@class SHConfig
   sh = {
-    enable = false,
+    enable = true,
     lsp = "bashls",
     --  brew install shfmt
     formatter = "shfmt",
-    format_on_save = false,
+    format_on_save = true,
   },
 
   ---@class PythonConfig
