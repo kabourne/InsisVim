@@ -460,7 +460,7 @@ local UserConfig = {
     enable = true,
     lsp = "yamlls",
     ---@type "prettier" | false
-    formatter = "prettier",
+    formatter = "yamlfmt",
     format_on_save = true,
   },
 

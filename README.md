@@ -33,6 +33,8 @@ brew install terraform
 brew install stylua
 brew install shfmt
 
+https://github.com/google/yamlfmt/releases/tag/v0.6.0
+
 ## License
 
 MIT

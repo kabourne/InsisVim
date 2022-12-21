@@ -43,6 +43,10 @@ M.getTSEnsureList = function()
     parserSet["markdown"] = true
   end
 
+  if cfg.yaml and cfg.yaml.enable then
+    parserSet["yaml"] = true
+  end
+
 --   if cfg.terraform and cfg.terraform.enable then
 --     parserSet["terraform"] = true
 --   end
@@ -71,6 +75,7 @@ M.getNulllsSources = function()
     rustfmt = formatting.rustfmt,
     eslint_d = formatting.eslint_d,
     terraform_fmt = formatting.terraform_fmt,
+    yamlfmt = formatting.yamlfmt,
     prettier = formatting.prettier.with({
       filetypes = {
         "javascript",
@@ -184,6 +189,12 @@ M.getNulllsSources = function()
           filetypes = { "yaml" },
         })
       )
+    elseif cfg.yaml.formatter == "yamlfmt" then
+      local formatter = formatterMap[cfg.yaml.formatter]
+      table.insert(sources, formatter)
+      if formatter then
+        table.insert(sources, formatterMap[cfg.yaml.formatter])
+      end
     end
   end
   if cfg.git and cfg.git.enable then
@@ -337,6 +348,12 @@ M.getMasonEnsureList = function()
   if cfg.terraform and cfg.terraform.enable then
     if configMap[cfg.terraform.lsp] then
       servers[cfg.terraform.lsp] = configMap[cfg.terraform.lsp]
+    end
+  end
+
+  if cfg.yaml and cfg.yaml.enable then
+    if configMap[cfg.yaml.lsp] then
+      servers[cfg.yaml.lsp] = configMap[cfg.yaml.lsp]
     end
   end
 
