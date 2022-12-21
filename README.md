@@ -29,6 +29,10 @@ TODO
 
 `npx zx https://insisvim.github.io/install.mjs`
 
+brew install terraform
+brew install stylua
+brew install shfmt
+
 ## License
 
 MIT
