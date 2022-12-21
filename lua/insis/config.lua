@@ -457,11 +457,11 @@ local UserConfig = {
 
   ---@class YamlConfig
   yaml = {
-    enable = false,
+    enable = true,
     lsp = "yamlls",
     ---@type "prettier" | false
     formatter = "prettier",
-    format_on_save = false,
+    format_on_save = true,
   },
 
   ---@class GitConfig
