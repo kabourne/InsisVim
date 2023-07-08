@@ -430,12 +430,12 @@ local UserConfig = {
 
   ---@class JsonConfig
   json = {
-    enable = false,
+    enable = true,
     lsp = "jsonls",
     -- npm install -g fixjson
     ---@type "fixjson" | "prettier"
     formatter = "fixjson",
-    format_on_save = false,
+    format_on_save = true,
   },
 
   ---@class MarkdownConfig
@@ -462,7 +462,7 @@ local UserConfig = {
 
   ---@class YamlConfig
   yaml = {
-    enable = false,
+    enable = true,
     lsp = "yamlls",
     ---@type "prettier" | false
     formatter = "prettier",
