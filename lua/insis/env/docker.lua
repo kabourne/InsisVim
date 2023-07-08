@@ -1,31 +1,29 @@
---- @param config ClangdConfig
+--- @param config DockerConfig
 return function(config)
   return {
+
     getFormatOnSavePattern = function()
-      if config.format_on_save then
-        return { "*.c", "*.cpp", "*.cc" }
-      end
       return {}
     end,
 
     getTSEnsureList = function()
-      return { "cpp", "c" }
+      return { "dockerfile" }
     end,
 
     getLSPEnsureList = function()
-      return { "clangd" }
+      if config.lsp == "dockerls" then
+        return { "dockerls" }
+      end
+      return {}
     end,
 
     getLSPConfigMap = function()
       return {
-        clangd = require("insis.lsp.config.clangd"),
+        dockerls = require("insis.lsp.config.docker"),
       }
     end,
 
     getToolEnsureList = function()
-      if config.formatter == "clang-format" then
-        return { "clang-format" }
-      end
       return {}
     end,
 
@@ -33,9 +31,6 @@ return function(config)
       local null_ls = pRequire("null-ls")
       if not null_ls then
         return {}
-      end
-      if config.formatter == "clang-format" then
-        return { null_ls.builtins.formatting.clang_format }
       end
       return {}
     end,

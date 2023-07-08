@@ -1,31 +1,24 @@
---- @param config ClangdConfig
+--- @param config UserConfig
 return function(config)
   return {
+
     getFormatOnSavePattern = function()
-      if config.format_on_save then
-        return { "*.c", "*.cpp", "*.cc" }
-      end
       return {}
     end,
 
     getTSEnsureList = function()
-      return { "cpp", "c" }
+      return {}
     end,
 
     getLSPEnsureList = function()
-      return { "clangd" }
+      return {}
     end,
 
     getLSPConfigMap = function()
-      return {
-        clangd = require("insis.lsp.config.clangd"),
-      }
+      return {}
     end,
 
     getToolEnsureList = function()
-      if config.formatter == "clang-format" then
-        return { "clang-format" }
-      end
       return {}
     end,
 
@@ -34,8 +27,10 @@ return function(config)
       if not null_ls then
         return {}
       end
-      if config.formatter == "clang-format" then
-        return { null_ls.builtins.formatting.clang_format }
+      if config.git.enable and config.git.code_actions == "gitsigns" then
+        return {
+          null_ls.builtins.code_actions.gitsigns,
+        }
       end
       return {}
     end,

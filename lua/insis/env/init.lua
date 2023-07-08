@@ -12,20 +12,12 @@ local enabledEnv = {}
 
 --- @param userConfig UserConfig
 local init = function(userConfig)
+  table.insert(enabledEnv, require("insis.env.common")(userConfig))
   if userConfig.lua.enable then
     table.insert(enabledEnv, require("insis.env.lua")(userConfig.lua))
   end
   if userConfig.frontend.enable then
     table.insert(enabledEnv, require("insis.env.frontend")(userConfig.frontend))
-  end
-  if userConfig.json.enable then
-    table.insert(enabledEnv, require("insis.env.json")(userConfig.json))
-  end
-  if userConfig.yaml.enable then
-    table.insert(enabledEnv, require("insis.env.yaml")(userConfig.yaml))
-  end
-  if userConfig.markdown.enable then
-    table.insert(enabledEnv, require("insis.env.markdown")(userConfig.markdown))
   end
   if userConfig.golang.enable then
     table.insert(enabledEnv, require("insis.env.golang")(userConfig.golang))
@@ -44,6 +36,18 @@ local init = function(userConfig)
   end
   if userConfig.ruby.enable then
     table.insert(enabledEnv, require("insis.env.ruby")(userConfig.ruby))
+  end
+  if userConfig.json.enable then
+    table.insert(enabledEnv, require("insis.env.json")(userConfig.json))
+  end
+  if userConfig.yaml.enable then
+    table.insert(enabledEnv, require("insis.env.yaml")(userConfig.yaml))
+  end
+  if userConfig.markdown.enable then
+    table.insert(enabledEnv, require("insis.env.markdown")(userConfig.markdown))
+  end
+  if userConfig.docker.enable then
+    table.insert(enabledEnv, require("insis.env.docker")(userConfig.docker))
   end
 end
 

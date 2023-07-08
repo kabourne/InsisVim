@@ -33,6 +33,7 @@
 ---@field markdown MarkdownConfig
 ---@field toml TomlConfig Toml user config
 ---@field yaml YamlConfig Yaml user config
+---@field docker DockerConfig Docker user config
 ---@field git GitConfig git user config
 ---@field mirror MirrorConfig mirror config
 
@@ -142,20 +143,17 @@ local UserConfig = {
 --       system_open = "<CR>",
       vsplit = "sv",
       split = "sh",
-      tabnew = "gh",
+      tabnew = "st",
       -- movement --
       parent_node = "P",
-      cd = "]",
-      dir_up = "[",
-      prev_sibling = "<",
-      next_sibling = ">",
       first_sibling = "K",
       last_sibling = "J",
+      cd = ">",
+      dir_up = "<",
       -- file toggle --
       toggle_git_ignored = "i", --.gitignore (git enable)
       toggle_dotfiles = ".", -- Hide (dotfiles)
       toggle_custom = "u", -- togglle custom config
-      toggle_file_info = "gh",
       -- file operate --
       create = "a",
       remove = "d",
@@ -166,6 +164,7 @@ local UserConfig = {
       copy_name = "y",
       copy_path = "Y",
       copy_absolute_path = "gy",
+      toggle_file_info = "gh",
     },
   },
 
@@ -351,6 +350,11 @@ local UserConfig = {
     ---@type "eslint_d" | "prettier"
     formatter = "prettier",
     format_on_save = false,
+    cspell = false,
+    tailwindcss = true,
+    prisma = false,
+    -- vue will take over typescript lsp
+    vue = false,
     -- extra lsp command provided by typescript.nvim
     typescript = {
       keys = {
@@ -467,6 +471,12 @@ local UserConfig = {
     ---@type "prettier" | false
     formatter = "prettier",
     format_on_save = false,
+  },
+
+  ---@class DockerConfig
+  docker = {
+    enable = false,
+    lsp = "dockerls",
   },
 
   ---@class GitConfig
